@@ -1,0 +1,101 @@
+login.html//index.html
+<html>
+<head>
+ <title>login</title>
+
+<style>
+
+body{
+background-color : lightblue;
+}
+
+h1{
+text-align: center;
+}
+
+form{
+text-align : center;
+}
+
+.loginform{
+border : 2px solid black;
+margin: 0 auto;
+width: fit-content;
+padding: 10px;
+border-radius: 10px;
+}
+
+
+</style>
+
+
+</head>
+<body>
+ <h1>LOGIN</h1>
+
+<div class="loginform">
+
+
+<form action="login.php" method="post">
+
+<label for="username">username</label><br>
+<input type="text" name="username" placeholder="username"><br><br>
+
+<label for="password">password</label><br>
+<input type="password" name="password" placeholder="password"><br><br>
+
+<button type="submit">submit</button>
+</div>
+</form>
+</form>
+
+</body>
+</html>
+
+
+login.php
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Your existing PHP code goes here
+$servername = "localhost:3307";
+$username = "root";
+$password = "";
+$dbname = "gym";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$username = $_POST['username'];
+$pass = $_POST['password'];
+
+// Insert user data into the database
+$sql = "INSERT INTO login(username, password) VALUES('$username', '$pass')";
+
+if ($conn->query($sql) === TRUE) {
+    header("Location: dashboard.html");
+    exit();
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+
+
+dashboard.html
+<html>
+<head>
+<title>sachin</title>
+</head>
+
+<body>
+<h1>sucessful login</h1>
+</body>
+</html>
